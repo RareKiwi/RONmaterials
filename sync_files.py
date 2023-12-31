@@ -80,6 +80,14 @@ def sync_files(file):
                     os.makedirs(os.path.dirname(p_file))
                 
                 os.link(g_file, p_file)
+                
+def get_directory_size(directory):
+    total_size = 0
+    for dirpath, dirnames, filenames in os.walk(directory):
+        for filename in filenames:
+            filepath = os.path.join(dirpath, filename)
+            total_size += os.path.getsize(filepath)
+    return total_size
 
 with open(interfaces_list, 'r') as file:
 # Iterate through each line in the file
@@ -88,14 +96,6 @@ with open(interfaces_list, 'r') as file:
         i += 1
         sync_files(line)
     print(f'Scanned {i} files')
-    
-def get_directory_size(directory):
-    total_size = 0
-    for dirpath, dirnames, filenames in os.walk(directory):
-        for filename in filenames:
-            filepath = os.path.join(dirpath, filename)
-            total_size += os.path.getsize(filepath)
-    return total_size
 
 size = get_directory_size(recyclepath) / 1024 / 1024
 print(f'Recycle path size: {size:.2f} MB')
