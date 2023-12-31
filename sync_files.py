@@ -1,5 +1,6 @@
 import os
 import shutil
+from datetime import datetime
 
 # Location of your RON project content folder with forward slashes and ending with /
 destination_project_content = 'G:/ReadyOrNotModding/ReadyOrNotOne/Content/'
@@ -11,6 +12,11 @@ destination_git_content = './Content/'
 interfaces_list = 'MaterialInterfaces.txt'
 path_to_replace = '/Game/'
 
+# Instead of os.remove files are moved here under a utc time
+# These should be created in the root dir of the respective drive by default.
+recyclepath = '/ronMaterialsRecycleBin'
+
+curtime = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 def sync_files_by_time(file1, file2):
     try:
         # Get the modification timestamps of both files
@@ -23,14 +29,20 @@ def sync_files_by_time(file1, file2):
             if timestamp1 > timestamp2:
                 source_file = file1
                 destination_file = file2
+                bin_path = file2.replace(destination_git_content, (recyclepath + '/git/' + curtime + '/') , 1) 
             else:
                 source_file = file2
                 destination_file = file1
+                bin_path = file1.replace(destination_project_content, (recyclepath + '/project/'  + curtime + '/') , 1)
 
             # Delete the older file if it exists
             if os.path.isfile(destination_file):
-                os.remove(destination_file)
-
+                # os.remove(destination_file)
+                
+                if not os.path.exists(os.path.dirname(bin_path)):
+                    os.makedirs(os.path.dirname(bin_path))
+                shutil.move(destination_file,bin_path)
+            
             # Use os.link to create a hard link to the source file
             os.link(source_file, destination_file)
 
@@ -76,3 +88,14 @@ with open(interfaces_list, 'r') as file:
         i += 1
         sync_files(line)
     print(f'Scanned {i} files')
+    
+def get_directory_size(directory):
+    total_size = 0
+    for dirpath, dirnames, filenames in os.walk(directory):
+        for filename in filenames:
+            filepath = os.path.join(dirpath, filename)
+            total_size += os.path.getsize(filepath)
+    return total_size
+
+size = get_directory_size(recyclepath) / 1024 / 1024
+print(f'Recycle path size: {size:.2f} MB')
