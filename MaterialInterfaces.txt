@@ -12156,3 +12156,13 @@
 /Game/ThirdParty/weathereffects/Materials/M_RainSheet.M_RainSheet
 /Game/ThirdParty/weathereffects/Materials/M_Ripples.M_Ripples
 /Game/ThirdParty/weathereffects/Materials/M_SnowFlake.M_SnowFlake
+/Game/Mods/KiwiCode/Builder/PlaceHolderTextures/Gray_BC1_sRGB.Gray_BC1_sRGB
+/Game/Mods/KiwiCode/Builder/PlaceHolderTextures/Normalmap_BC5.Normalmap_BC5
+/Game/Mods/KiwiCode/Builder/PlaceHolderTextures/ORM_Masks.ORM_Masks
+/Game/Mods/KiwiCode/Builder/PlaceHolderTextures/White_BC1.White_BC1
+/Game/Mods/KiwiCode/Builder/PlaceHolderTextures/White_BC1_sRGB.White_BC1_sRGB
+/Game/Mods/KiwiCode/Builder/PlaceHolderTextures/White_BC4.White_BC4
+/Game/Mods/KiwiCode/Builder/PlaceHolderTextures/White_Grayscale.White_Grayscale
+/Game/Mods/KiwiCode/Builder/PlaceHolderTextures/White_Grayscale_sRGB.White_Grayscale_sRGB
+/Game/Mods/KiwiCode/Builder/ORM.ORM
+/Game/Mods/KiwiCode/Builder/MF_UVTriplanar_builder.MF_UVTriplanar_builder
